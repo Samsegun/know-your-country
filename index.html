@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Where in the world?</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="head margin-width-desktop">
+          <h1>Where in the world?</h1>
+          <div class="dark-mode">
+            <!-- <button aria-hidden="true"> -->
+            <span class="nav-icon">
+              <i class="far fa-moon"></i>
+            </span>
+            <!-- </button> -->
+            <p>Dark Mode</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="margin-width-desktop main">
+        <section class="controls">
+          <div class="search">
+            <button class="searchbtn">
+              <i class="fas fa-search"></i>
+            </button>
+
+            <input type="text" placeholder="Search for a Country..." />
+          </div>
+
+          <div class="filter">
+            <div class="filter-control">
+              <button aria-label="filter countries">Filter by Region</button>
+              <span aria-label="filter dropdown">
+                <i class="fas fa-chevron-down"></i>
+              </span>
+            </div>
+
+            <div class="filter-dropdown">
+              <ul class="continents">
+                <li><a href="#">Africa</a></li>
+                <li><a href="#">America</a></li>
+                <li><a href="#">Asia</a></li>
+                <li><a href="#">Europe</a></li>
+                <li><a href="#">Oceania</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="countries">
+          <div class="country">
+            <img src="german-flag.jpg" alt="country" />
+            <div class="country-info">
+              <h2>Germany</h2>
+              <h3>Population: <span class="info">80,000,000</span></h3>
+              <h3>Region: <span class="info">Europe</span></h3>
+              <h3>Capital: <span class="info">Berlin</span></h3>
+            </div>
+          </div>
+          <div class="country">
+            <img src="german-flag.jpg" alt="country" />
+            <div class="country-info">
+              <h2>Germany</h2>
+              <h3>Population: <span class="info">80,000,000</span></h3>
+              <h3>Region: <span class="info">Europe</span></h3>
+              <h3>Capital: <span class="info">Berlin</span></h3>
+            </div>
+          </div>
+          <div class="country">
+            <img src="german-flag.jpg" alt="country" />
+            <div class="country-info">
+              <h2>Germany</h2>
+              <h3>Population: <span class="info">80,000,000</span></h3>
+              <h3>Region: <span class="info">Europe</span></h3>
+              <h3>Capital: <span class="info">Berlin</span></h3>
+            </div>
+          </div>
+          <div class="country">
+            <img src="german-flag.jpg" alt="country" />
+            <div class="country-info">
+              <h2>Germany</h2>
+              <h3>Population: <span class="info">80,000,000</span></h3>
+              <h3>Region: <span class="info">Europe</span></h3>
+              <h3>Capital: <span class="info">Berlin</span></h3>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- <footer>
+        <div class="devlink">
+          <p>
+            Challenge by
+            <a href="https://www.frontendmentor.io">Frontend Mentor</a>. Coded
+            by
+            <a href="https://github.com/Samsegun">Oye Segun</a>
+          </p>
+        </div>
+      </footer> -->
+    </div>
+  </body>
+</html>
