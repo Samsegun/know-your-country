@@ -127,6 +127,15 @@ main .controls {
   border: none;
 }
 
+.filter-control span {
+  transform: rotate(0);
+  transition: transform 0.4s;
+}
+
+.filter-control .rotate {
+  transform: rotate(180deg);
+}
+
 .filter-dropdown {
   position: absolute;
   left: 0;
@@ -165,6 +174,7 @@ main .controls {
 
 .filter-dropdown li a:hover {
   font-weight: 800;
+  background: rgba(224, 219, 219, 0.39);
 }
 
 .countries {
@@ -191,7 +201,6 @@ main .controls {
 
 .countries .country-info h2 {
   margin: 1rem 0;
-  /* font-size: 0.8rem; */
 }
 
 .countries .country-info h3 {
