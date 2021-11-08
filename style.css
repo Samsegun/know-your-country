@@ -73,6 +73,10 @@ button {
 /* end of header */
 
 /* main */
+.close {
+  display: none;
+}
+
 .main {
   margin-bottom: 3rem;
 }
@@ -224,6 +228,81 @@ main .controls {
 }
 
 /* end of main */
+
+/* details-page(article) */
+article {
+  height: calc(100vh - 76px - 38px);
+}
+
+.country-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.country-content {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+}
+
+.country-flag {
+  flex-basis: 100%;
+  background: url("german-flag.jpg") center/cover no-repeat;
+  min-height: 320px;
+}
+
+.country-details {
+  flex-basis: 100%;
+  /* background: chocolate; */
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.country-details h2 {
+  font-size: 1.5rem;
+}
+
+.country-details h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.country-details .country-profile {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.9;
+}
+
+.country-details .info {
+  font-weight: 300;
+}
+
+.country-details .borders {
+  display: flex;
+  align-items: center;
+}
+
+.country-details .borders-country {
+  margin-left: 1rem;
+}
+
+.country-details .borders-country button {
+  border: none;
+  margin: 0 0.2rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+  transition: transform 0.2s linear;
+}
+
+.country-details .borders-country button:hover {
+  transform: scale(1.15);
+}
+
+/* end of details-page(article) */
 
 /* footer */
 
