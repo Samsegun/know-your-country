@@ -6,7 +6,8 @@
   --very-dark-blue-lightmodetext: hsl(200, 15%, 8%);
   --dark-gray-lightmodeinput: hsl(0, 0%, 52%);
   --very-lightgray: hsl(0, 0%, 98%);
-  --white: hsl(0, 0%, 100%);
+  --darkmode-boxshadow: rgba(0, 0, 0, 0.15);
+  --white: white;
 }
 
 * {
@@ -17,12 +18,13 @@
 
 body {
   font-family: "Nunito Sans", Arial;
-  /* background: var(--very-dark-blue-darkmode); */
 }
 
 .container {
   margin: 0 auto;
+  height: auto;
   background: var(--very-lightgray);
+  transition: all 0.3s linear;
 }
 
 /* header */
@@ -30,6 +32,7 @@ body {
 header {
   box-shadow: 0 1px 4px rgba(104, 104, 104, 0.8);
   background: var(--white);
+  transition: all 0.3s linear;
 }
 
 .margin-width-desktop {
@@ -98,17 +101,24 @@ main .controls {
   position: absolute;
   top: 2px;
   left: 2px;
+  color: inherit;
+  transition: color 0.4s;
 }
 
-.controls input {
+.input-text {
   padding: 1rem 3rem;
   width: 25rem;
   font-size: 0.9rem;
   outline: none;
   border: none;
-  color: var(--dark-gray-lightmodeinput);
+  color: inherit;
   box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
   border-radius: 4px;
+  transition: all 0.4s;
+}
+
+.controls .input-text::placeholder {
+  color: inherit;
 }
 
 .filter {
@@ -124,12 +134,14 @@ main .controls {
   cursor: pointer;
   box-shadow: 1px 1px 2px var(--dark-gray-lightmodeinput);
   border-radius: 4px;
+  transition: all 0.4s;
 }
 
 .filter-control button {
   background: none;
   outline: none;
   border: none;
+  color: inherit;
 }
 
 .filter-control span {
@@ -151,9 +163,9 @@ main .controls {
   background: var(--white);
   margin-top: 0.3rem;
   border-radius: 4px;
-  color: var(--very-dark-blue-lightmodetext);
   box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
-  transition: height 0.4s;
+  z-index: 1;
+  transition: all 0.4s;
 }
 
 .filter-dropdown.slide-down {
@@ -171,7 +183,7 @@ main .controls {
 
 .filter-dropdown li a {
   text-decoration: none;
-  color: var(--very-dark-blue-lightmodetext);
+  color: inherit;
   font-weight: 600;
   display: inline-block;
   width: 100%;
@@ -207,10 +219,11 @@ main .controls {
   border-radius: 6px 6px 0 0;
 }
 
-.countries .country-info {
+.country-info {
   background: var(--white);
   padding: 1rem;
   box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+  transition: all 0.4s;
 }
 
 .countries .country-info h2 {
@@ -231,18 +244,35 @@ main .controls {
 
 /* details-page(article) */
 article {
-  height: calc(100vh - 76px - 38px);
+  min-height: calc(100vh - 76px - 38px - 18.5px);
+}
+
+article button {
+  display: inline-block;
+  margin: 3rem 0;
+  border: none;
+  padding: 0.5rem 1rem;
+  background: none;
+  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+  transition: transform 0.2s linear;
+  border-radius: 5px;
+}
+
+article button:hover {
+  transform: scale(1.15);
 }
 
 .country-wrapper {
   height: 100%;
   display: flex;
   align-items: center;
+  /* max-width: 1440px; */
 }
 
 .country-content {
   display: flex;
   width: 100%;
+  min-height: 360px;
   gap: 2rem;
 }
 
@@ -250,11 +280,11 @@ article {
   flex-basis: 100%;
   background: url("german-flag.jpg") center/cover no-repeat;
   min-height: 320px;
+  max-width: 1170px;
 }
 
 .country-details {
   flex-basis: 100%;
-  /* background: chocolate; */
   margin: 1rem 0;
   display: flex;
   flex-direction: column;
@@ -276,6 +306,10 @@ article {
   line-height: 1.9;
 }
 
+.country-details .profile2 {
+  padding-right: 4rem;
+}
+
 .country-details .info {
   font-weight: 300;
 }
@@ -295,6 +329,7 @@ article {
   padding: 0.5rem 1rem;
   background: none;
   box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+  border-radius: 4px;
   transition: transform 0.2s linear;
 }
 
@@ -307,10 +342,10 @@ article {
 /* footer */
 
 .devlink {
-  padding: 0.5rem;
-  margin: 2rem 0 1rem;
+  padding: 0.5rem 0 1rem;
+  margin: 2rem 0 0;
   text-align: center;
-  color: black;
+  color: inherit;
   font-weight: 600;
 }
 
@@ -320,3 +355,17 @@ article {
 }
 
 /* end of footer */
+
+/* dark mode styles */
+.dark-mode-bg {
+  background: var(--very-dark-blue-darkmode);
+  color: var(--white);
+}
+
+.dark-mode-element {
+  background: var(--dark-blue);
+  color: var(--white);
+  border: none;
+  box-shadow: 0 1px 4px var(--darkmode-boxshadow);
+}
+/* end of dark mode styles */

@@ -1,10 +1,14 @@
 const container = document.querySelector(".container");
+const darkMode = document.querySelector(".dark-mode");
+const header = document.querySelector("header");
 const mainPage = document.querySelector(".main");
-const footer = document.querySelector("footer");
+const input = document.querySelector(".input-text");
+const filter = document.querySelector(".filter");
 const filterControl = document.querySelector(".filter-control");
 const filterControlSpan = document.querySelector(".filter-control span");
 const filterDropDown = document.querySelector(".filter-dropdown");
 const countriesDOM = document.querySelector(".countries");
+const footer = document.querySelector("footer");
 
 // getting the countries
 class Countries {
@@ -103,4 +107,16 @@ document.addEventListener("DOMContentLoaded", () => {
 filterControl.addEventListener("click", () => {
   filterDropDown.classList.toggle("slide-down");
   filterControlSpan.classList.toggle("rotate");
+});
+
+darkMode.addEventListener("click", () => {
+  container.classList.toggle("dark-mode-bg");
+  header.classList.toggle("dark-mode-element");
+  input.classList.toggle("dark-mode-element");
+  filterControl.classList.toggle("dark-mode-element");
+  filterDropDown.classList.toggle("dark-mode-element");
+  const countryInfos = document.querySelectorAll(".country-info");
+  countryInfos.forEach(country =>
+    country.classList.toggle("dark-mode-element")
+  );
 });
