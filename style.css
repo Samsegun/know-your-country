@@ -22,7 +22,6 @@ body {
 
 .container {
   margin: 0 auto;
-  height: auto;
   background: var(--very-lightgray);
   transition: all 0.3s linear;
 }
@@ -32,6 +31,10 @@ body {
 header {
   box-shadow: 0 1px 4px rgba(104, 104, 104, 0.8);
   background: var(--white);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 2;
   transition: all 0.3s linear;
 }
 
@@ -201,6 +204,7 @@ main .controls {
 }
 
 .countries .country {
+  position: relative;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -214,7 +218,7 @@ main .controls {
 
 .countries img {
   width: 100%;
-  height: 25vh;
+  height: 100%;
   object-fit: cover;
   border-radius: 6px 6px 0 0;
 }
@@ -240,6 +244,14 @@ main .controls {
   font-weight: 600;
 }
 
+.countries .details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 /* end of main */
 
 /* details-page(article) */
@@ -247,7 +259,7 @@ article {
   min-height: calc(100vh - 76px - 38px - 18.5px);
 }
 
-article button {
+.return-btn {
   display: inline-block;
   margin: 3rem 0;
   border: none;
@@ -258,7 +270,7 @@ article button {
   border-radius: 5px;
 }
 
-article button:hover {
+.return-btn:hover {
   transform: scale(1.15);
 }
 
@@ -266,21 +278,25 @@ article button:hover {
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   /* max-width: 1440px; */
 }
 
 .country-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: 3rem;
+}
+
+.image-container {
+  flex-basis: 100%;
   width: 100%;
-  min-height: 360px;
-  gap: 2rem;
+  min-height: 320px;
 }
 
 .country-flag {
-  flex-basis: 100%;
-  background: url("german-flag.jpg") center/cover no-repeat;
-  min-height: 320px;
-  max-width: 1170px;
+  width: 100%;
+  height: 100%;
 }
 
 .country-details {
@@ -296,18 +312,14 @@ article button:hover {
 }
 
 .country-details h3 {
-  font-size: 1rem;
+  font-size: 0.87rem;
   font-weight: 600;
 }
 
 .country-details .country-profile {
   display: flex;
   justify-content: space-between;
-  line-height: 1.9;
-}
-
-.country-details .profile2 {
-  padding-right: 4rem;
+  line-height: 2.2;
 }
 
 .country-details .info {
@@ -321,22 +333,23 @@ article button:hover {
 
 .country-details .borders-country {
   margin-left: 1rem;
+  line-height: 2.2;
 }
 
-.country-details .borders-country button {
+.border-country-btn {
   border: none;
+  font-size: 0.7rem;
   margin: 0 0.2rem;
   padding: 0.5rem 1rem;
   background: none;
   box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
   border-radius: 4px;
-  transition: transform 0.2s linear;
+  transition: all 0.2s linear;
 }
 
 .country-details .borders-country button:hover {
   transform: scale(1.15);
 }
-
 /* end of details-page(article) */
 
 /* footer */
