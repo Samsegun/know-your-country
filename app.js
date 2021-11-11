@@ -4,8 +4,7 @@ const header = document.querySelector("header");
 const mainPage = document.querySelector(".main");
 const input = document.querySelector(".input-text");
 const filter = document.querySelector(".filter");
-const filterControl = document.querySelector(".filter-control");
-const filterControlSpan = document.querySelector(".filter-control span");
+const filterControlBtn = document.querySelector(".filter-control .filter-btn");
 const filterDropDown = document.querySelector(".filter-dropdown");
 const countriesDOM = document.querySelector(".countries");
 const detailsPage = container.querySelector("article");
@@ -67,13 +66,10 @@ class Countries {
 }
 
 class UI {
-  displayCountries(countries) {
-    let count = 0;
-
-    for (const country of countries) {
-      const div = document.createElement("div");
-      div.className = "country";
-      div.innerHTML = `
+  createCountry(country) {
+    const div = document.createElement("div");
+    div.className = "country";
+    div.innerHTML = `
       <img src=${country.flag} alt="country"/>
       <div class="country-info">
         <h2>${country.name}</h2>
@@ -89,14 +85,48 @@ class UI {
       </div>
       <div class = "details" id = ${country.id}></div>
       `;
-
-      countriesDOM.append(div);
-      count++;
-      if (count > 100) {
-        break;
-      }
-    }
+    countriesDOM.append(div);
   }
+
+  displayCountries(countries) {
+    countries.forEach(country => this.createCountry(country));
+    // let count = 0;
+
+    // for (const country of countries) {
+    //   const div = document.createElement("div");
+    //   div.className = "country";
+    //   div.innerHTML = `
+    //   <img src=${country.flag} alt="country"/>
+    //   <div class="country-info">
+    //     <h2>${country.name}</h2>
+    //     <h3>Population: <span class="info">${
+    //       country.population === 0
+    //         ? "Uninhabited"
+    //         : country.population.toLocaleString()
+    //     }</span></h3>
+    //     <h3>Region: <span class="info">${country.region}</span></h3>
+    //     <h3>Capital: <span class="info">${
+    //       country.capital === undefined ? "Not Available" : country.capital
+    //     }</span></h3>
+    //   </div>
+    //   <div class = "details" id = ${country.id}></div>
+    //   `;
+
+    //   countriesDOM.append(div);
+    //   count++;
+    //   if (count > 100) {
+    //     break;
+    //   }
+    // }
+  }
+
+  filterCountries = () => {
+    // filter.addEventListener("click", Event => {
+    //   if (Event.target.classList.contains("filter-btn")) {
+    //     console.log("ho");
+    //   }
+    // });
+  };
 
   onCountries(countries) {
     countriesDOM.addEventListener("click", Event => {
@@ -208,12 +238,20 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(() => {
       darkMode.style.display = "block";
       ui.onCountries(countryData);
+      // ui.filterCountries();
     });
 });
 
-filterControl.addEventListener("click", () => {
+filterControlBtn.addEventListener("click", () => {
   filterDropDown.classList.toggle("slide-down");
-  filterControlSpan.classList.toggle("rotate");
+  filterControlBtn.classList.toggle("rotate");
+});
+
+filterDropDown.addEventListener("click", Event => {
+  // console.log(Event);
+  if (Event.target.classList.contains("continent")) {
+    console.log("pi");
+  }
 });
 
 darkMode.addEventListener("click", () => {

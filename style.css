@@ -18,6 +18,7 @@
 
 body {
   font-family: "Nunito Sans", Arial;
+  background: var(--very-lightgray);
 }
 
 .container {
@@ -134,25 +135,30 @@ main .controls {
   justify-content: space-between;
   background: var(--white);
   padding: 1rem;
-  cursor: pointer;
   box-shadow: 1px 1px 2px var(--dark-gray-lightmodeinput);
   border-radius: 4px;
   transition: all 0.4s;
 }
 
-.filter-control button {
+.filter-control small {
+  font-weight: 600;
+}
+
+.filter-control .filter-btn {
   background: none;
   outline: none;
   border: none;
   color: inherit;
-}
-
-.filter-control span {
+  font-size: 1rem;
   transform: rotate(0);
   transition: transform 0.4s;
 }
 
-.filter-control .rotate {
+.filter-control .filter-btn:hover {
+  background: rgba(211, 209, 209, 0.35);
+}
+
+.filter-btn.rotate {
   transform: rotate(180deg);
 }
 
