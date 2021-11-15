@@ -245,21 +245,20 @@ returnBtn.addEventListener("click", Event => {
 });
 
 // weird behaviour
-// input.addEventListener("keyup", Event => {
-//   Event.preventDefault();
+input.addEventListener("keyup", Event => {
+  Event.preventDefault();
 
-//   console.log(Event);
-//   const text = Event.target.value.toLowerCase();
+  const text = Event.target.value.toLowerCase();
 
-//   const countries = countriesDOM.querySelectorAll(".country-name");
+  const countries = countriesDOM.querySelectorAll(".country-name");
 
-//   Array.from(countries).forEach(country => {
-//     const countryName = country.textContent.toLowerCase();
+  Array.from(countries).forEach(country => {
+    const countryName = country.textContent.toLowerCase();
 
-//     if (countryName.indexOf(text) != -1) {
-//       country.parentElement.parentElement.style.display = "block";
-//     } else {
-//       country.parentElement.parentElement.style.display = "none";
-//     }
-//   });
-// });
+    if (countryName.indexOf(text) != -1) {
+      country.parentElement.parentElement.style.display = "flex";
+    } else {
+      country.parentElement.parentElement.style.display = "none";
+    }
+  });
+});
