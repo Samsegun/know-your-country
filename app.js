@@ -1,30 +1,11 @@
-const container = document.querySelector(".container");
-const darkMode = document.querySelector(".dark-mode");
-const header = document.querySelector("header");
-const mainPage = document.querySelector(".main");
-const input = document.querySelector(".input-text");
-const filter = document.querySelector(".filter");
-const filterControl = document.querySelector(".filter-control");
-const filterControlBtn = document.querySelector(".filter-control .filter-btn");
-const filterDropDown = document.querySelector(".filter-dropdown");
-const countriesDOM = document.querySelector(".countries");
-const detailsPage = container.querySelector("article");
-const returnBtn = container.querySelector(".return-btn");
-const detailsPageWrapper = container.querySelector("article .country-wrapper");
-const detailsPageContent = container.querySelector("article .country-content");
-const detailsPageCountryProfile = container.querySelector(
-  "article .country-details"
-);
-const footer = document.querySelector("footer");
-
 // datas of country
 let countryData;
 
 // getting the countries
 class Countries {
-  async getCountries() {
+  async getCountries(mode) {
     try {
-      let result = await fetch("https://restcountries.com/v2/all");
+      let result = await fetch(`https://restcountries.com/v2/${mode}`);
       let data = await result.json();
       let id = 0;
 
@@ -97,7 +78,6 @@ class UI {
     countriesDOM.addEventListener("click", Event => {
       if (Event.target.classList.contains("details")) {
         let country = Event.target;
-        console.log(country);
         let id = parseInt(country.id);
 
         console.log(countries);
@@ -191,14 +171,14 @@ class UI {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+const domHandler = () => {
   const countries = new Countries();
   const ui = new UI();
   darkMode.style.display = "none";
 
   // display countries
   countries
-    .getCountries()
+    .getCountries("all")
     .then(countries => {
       ui.displayCountries(countries);
       countryData = [...countries];
@@ -207,19 +187,29 @@ document.addEventListener("DOMContentLoaded", () => {
       darkMode.style.display = "block";
       ui.onCountries(countryData);
     });
-});
+};
+
+document.addEventListener("DOMContentLoaded", domHandler);
+// const countries = new Countries();
+// const ui = new UI();
+// darkMode.style.display = "none";
+
+// // display countries
+// countries
+//   .getCountries("all")
+//   .then(countries => {
+//     ui.displayCountries(countries);
+//     countryData = [...countries];
+//   })
+//   .then(() => {
+//     darkMode.style.display = "block";
+//     ui.onCountries(countryData);
+//   });
 
 filterControlBtn.addEventListener("click", () => {
   filterDropDown.classList.toggle("slide-down");
   filterControlBtn.classList.toggle("rotate");
 });
-
-// filterDropDown.addEventListener("click", Event => {
-//   // console.log(Event);
-//   if (Event.target.classList.contains("continent")) {
-//     console.log("pi");
-//   }
-// });
 
 darkMode.addEventListener("click", () => {
   container.classList.toggle("dark-mode-bg");
@@ -244,21 +234,34 @@ returnBtn.addEventListener("click", Event => {
   detailsPageContent.innerHTML = ``;
 });
 
+// class Search {
+//   async searchCountries(name) {
+//     try {
+//       let result = await fetch(`https://restcountries.com/v2/name/${name}`);
+//       let data = result.json()
+//     } catch (error) {
+
+//     }
+//   }
+// }
+
 // weird behaviour
 input.addEventListener("keyup", Event => {
   Event.preventDefault();
 
   const text = Event.target.value.toLowerCase();
 
-  const countries = countriesDOM.querySelectorAll(".country-name");
+  // const countries = new Countries();
 
-  Array.from(countries).forEach(country => {
-    const countryName = country.textContent.toLowerCase();
+  // const countries = countriesDOM.querySelectorAll(".country-name");
 
-    if (countryName.indexOf(text) != -1) {
-      country.parentElement.parentElement.style.display = "flex";
-    } else {
-      country.parentElement.parentElement.style.display = "none";
-    }
-  });
+  // Array.from(countries).forEach(country => {
+  //   const countryName = country.textContent.toLowerCase();
+
+  //   if (countryName.indexOf(text) != -1) {
+  //     country.parentElement.parentElement.style.display = "flex";
+  //   } else {
+  //     country.parentElement.parentElement.style.display = "none";
+  //   }
+  // });
 });
