@@ -60,7 +60,9 @@ class UI {
             ? "Uninhabited"
             : country.population.toLocaleString()
         }</span></h3>
-        <h3>Region: <span class="info">${country.region}</span></h3>
+        <h3 class="region">Region: <span class="info">${
+          country.region
+        }</span></h3>
         <h3>Capital: <span class="info">${
           country.capital === undefined ? "Not Available" : country.capital
         }</span></h3>
@@ -80,10 +82,7 @@ class UI {
         let country = Event.target;
         let id = parseInt(country.id);
 
-        console.log(countries);
-        console.log(id);
         let targetCountry = countries.find(country => country.id === id);
-        console.log(targetCountry);
 
         // for inconsistencies in languages & borderCountries data structure
         const languages = targetCountry.languages.map(
@@ -196,6 +195,16 @@ filterControlBtn.addEventListener("click", () => {
   filterControlBtn.classList.toggle("rotate");
 });
 
+// mainPage.addEventListener("click", () => {
+//   if (
+//     filterDropDown.classList.contains("slide-down") &&
+//     filterControlBtn.classList.contains("rotate")
+//   ) {
+//     filterDropDown.classList.remove("slide-down");
+//     filterControlBtn.classList.remove("rotate");
+//   }
+// });
+
 darkMode.addEventListener("click", () => {
   container.classList.toggle("dark-mode-bg");
   header.classList.toggle("dark-mode-element");
@@ -221,20 +230,6 @@ returnBtn.addEventListener("click", Event => {
 
 form.addEventListener("submit", Event => {
   Event.preventDefault();
-
-  // const text = input.value.toLowerCase();
-
-  // const countries = countriesDOM.querySelectorAll(".country-name");
-
-  // Array.from(countries).forEach(country => {
-  //   const countryName = country.textContent.toLowerCase();
-
-  //   if (countryName.includes(text)) {
-  //     country.parentElement.parentElement.style.display = "flex";
-  //   } else {
-  //     country.parentElement.parentElement.style.display = "none";
-  //   }
-  // });
 });
 
 // weird scroll-height behaviour
@@ -254,4 +249,24 @@ input.addEventListener("keyup", Event => {
       country.parentElement.parentElement.style.display = "none";
     }
   });
+});
+
+continents.addEventListener("click", Event => {
+  if (Event.target.classList.contains("continent")) {
+    const text = Event.target.textContent.toLowerCase();
+
+    const countries = countriesDOM.querySelectorAll(".region .info");
+
+    Array.from(countries).forEach(country => {
+      const countryName = country.textContent.toLowerCase();
+
+      if (countryName === text) {
+        country.parentElement.parentElement.parentElement.style.display =
+          "flex";
+      } else {
+        country.parentElement.parentElement.parentElement.style.display =
+          "none";
+      }
+    });
+  }
 });

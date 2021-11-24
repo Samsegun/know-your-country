@@ -191,19 +191,14 @@ main .controls {
 
 .filter-dropdown li {
   margin: 1rem 0;
-}
-
-.filter-dropdown li a {
-  text-decoration: none;
   color: inherit;
   font-weight: 600;
-  display: inline-block;
-  width: 100%;
 }
 
-.filter-dropdown li a:hover {
+.filter-dropdown li:hover {
   font-weight: 800;
   background: rgba(224, 219, 219, 0.39);
+  cursor: pointer;
 }
 
 .countries {
@@ -302,9 +297,9 @@ article {
 .image-container {
   flex-basis: 100%;
   width: 100%;
-  min-height: 320px;
-  max-height: 430px;
-  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+  /* min-height: 320px; */
+  max-height: 900px;
+  box-shadow: 0 1px 3px var(--dark-gray-lightmodeinput);
 }
 
 .country-flag {
