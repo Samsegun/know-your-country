@@ -219,13 +219,29 @@ returnBtn.addEventListener("click", Event => {
   detailsPageContent.innerHTML = ``;
 });
 
-// weird behaviour
+form.addEventListener("submit", Event => {
+  Event.preventDefault();
+
+  // const text = input.value.toLowerCase();
+
+  // const countries = countriesDOM.querySelectorAll(".country-name");
+
+  // Array.from(countries).forEach(country => {
+  //   const countryName = country.textContent.toLowerCase();
+
+  //   if (countryName.includes(text)) {
+  //     country.parentElement.parentElement.style.display = "flex";
+  //   } else {
+  //     country.parentElement.parentElement.style.display = "none";
+  //   }
+  // });
+});
+
+// weird scroll-height behaviour
 input.addEventListener("keyup", Event => {
   Event.preventDefault();
 
   const text = input.value.toLowerCase();
-
-  domHandler.bind(this, `name/{${text}}`);
 
   const countries = countriesDOM.querySelectorAll(".country-name");
 
