@@ -2,6 +2,7 @@ const container = document.querySelector(".container");
 const darkMode = document.querySelector(".dark-mode");
 const header = document.querySelector("header");
 const mainPage = document.querySelector(".main");
+const form = document.querySelector(".main form");
 const input = document.querySelector(".input-text");
 const filter = document.querySelector(".filter");
 const filterControl = document.querySelector(".filter-control");

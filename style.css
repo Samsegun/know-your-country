@@ -25,6 +25,7 @@ body {
 .container {
   position: relative;
   margin: 0 auto;
+  min-height: 100vh;
   background: var(--very-lightgray);
   transition: all 0.3s linear;
 }
@@ -213,6 +214,7 @@ main .controls {
 
 .countries .country {
   position: relative;
+  max-width: 350px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;

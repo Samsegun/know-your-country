@@ -171,14 +171,14 @@ class UI {
   }
 }
 
-const domHandler = () => {
+const domHandler = mode => {
   const countries = new Countries();
   const ui = new UI();
   darkMode.style.display = "none";
 
   // display countries
   countries
-    .getCountries("all")
+    .getCountries(mode)
     .then(countries => {
       ui.displayCountries(countries);
       countryData = [...countries];
@@ -189,22 +189,7 @@ const domHandler = () => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", domHandler);
-// const countries = new Countries();
-// const ui = new UI();
-// darkMode.style.display = "none";
-
-// // display countries
-// countries
-//   .getCountries("all")
-//   .then(countries => {
-//     ui.displayCountries(countries);
-//     countryData = [...countries];
-//   })
-//   .then(() => {
-//     darkMode.style.display = "block";
-//     ui.onCountries(countryData);
-//   });
+document.addEventListener("DOMContentLoaded", domHandler.bind(this, "all"));
 
 filterControlBtn.addEventListener("click", () => {
   filterDropDown.classList.toggle("slide-down");
@@ -234,34 +219,23 @@ returnBtn.addEventListener("click", Event => {
   detailsPageContent.innerHTML = ``;
 });
 
-// class Search {
-//   async searchCountries(name) {
-//     try {
-//       let result = await fetch(`https://restcountries.com/v2/name/${name}`);
-//       let data = result.json()
-//     } catch (error) {
-
-//     }
-//   }
-// }
-
 // weird behaviour
 input.addEventListener("keyup", Event => {
   Event.preventDefault();
 
-  const text = Event.target.value.toLowerCase();
+  const text = input.value.toLowerCase();
 
-  // const countries = new Countries();
+  domHandler.bind(this, `name/{${text}}`);
 
-  // const countries = countriesDOM.querySelectorAll(".country-name");
+  const countries = countriesDOM.querySelectorAll(".country-name");
 
-  // Array.from(countries).forEach(country => {
-  //   const countryName = country.textContent.toLowerCase();
+  Array.from(countries).forEach(country => {
+    const countryName = country.textContent.toLowerCase();
 
-  //   if (countryName.indexOf(text) != -1) {
-  //     country.parentElement.parentElement.style.display = "flex";
-  //   } else {
-  //     country.parentElement.parentElement.style.display = "none";
-  //   }
-  // });
+    if (countryName.indexOf(text) != -1) {
+      country.parentElement.parentElement.style.display = "flex";
+    } else {
+      country.parentElement.parentElement.style.display = "none";
+    }
+  });
 });
