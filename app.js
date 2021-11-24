@@ -195,16 +195,6 @@ filterControlBtn.addEventListener("click", () => {
   filterControlBtn.classList.toggle("rotate");
 });
 
-// mainPage.addEventListener("click", () => {
-//   if (
-//     filterDropDown.classList.contains("slide-down") &&
-//     filterControlBtn.classList.contains("rotate")
-//   ) {
-//     filterDropDown.classList.remove("slide-down");
-//     filterControlBtn.classList.remove("rotate");
-//   }
-// });
-
 darkMode.addEventListener("click", () => {
   container.classList.toggle("dark-mode-bg");
   header.classList.toggle("dark-mode-element");
