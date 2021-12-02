@@ -47,6 +47,9 @@ class Countries {
   }
 }
 
+// client-height
+let clientHeight;
+
 class UI {
   createCountry(country) {
     const div = document.createElement("div");
@@ -81,6 +84,8 @@ class UI {
       if (Event.target.classList.contains("details")) {
         let country = Event.target;
         let id = parseInt(country.id);
+
+        clientHeight = country.parentElement.offsetTop;
 
         let targetCountry = countries.find(country => country.id === id);
 
@@ -216,6 +221,10 @@ returnBtn.addEventListener("click", Event => {
   detailsPage.classList.toggle("close");
   mainPage.classList.toggle("close");
   detailsPageContent.innerHTML = ``;
+  window.scrollTo({
+    top: clientHeight - 120,
+    behavior: "instant",
+  });
 });
 
 form.addEventListener("submit", Event => {
