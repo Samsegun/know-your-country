@@ -18,6 +18,7 @@ class Countries {
           capital,
           region,
           subregion,
+          alpha3Code,
         } = country;
         const topLevelDomain = country.topLevelDomain;
         const currency = country.currencies;
@@ -33,6 +34,7 @@ class Countries {
           capital,
           region,
           subregion,
+          alpha3Code,
           topLevelDomain,
           currency,
           languages,
@@ -85,6 +87,7 @@ class UI {
         let country = Event.target;
         let id = parseInt(country.id);
 
+        // for window scrolling
         clientHeight = country.parentElement.offsetTop;
 
         let targetCountry = countries.find(country => country.id === id);
@@ -118,60 +121,103 @@ class UI {
           }
         };
 
-        detailsPageContent.innerHTML = `
-        <div class="image-container">
-        <img src=${targetCountry.flag} alt="" class="country-flag" />
-        </div>
-        <div class="country-details">
-          <h2>${targetCountry.name}</h2>
-          <div class="country-profile">
-            <div class="profile1">
-              <h3>Native Name: <span class="info">${
-                targetCountry.nativeName
-              }</span></h3>
-              <h3>Population: <span class="info">${
-                targetCountry.population === 0
-                  ? "Uninhabited"
-                  : targetCountry.population.toLocaleString()
-              }</span></h3>
-              <h3>Region: <span class="info">${targetCountry.region}</span></h3>
-              <h3>Sub Region: <span class="info">${
-                targetCountry.subregion
-              }</span></h3>
-              <h3>Capital: <span class="info">${
-                targetCountry.capital === undefined
-                  ? "Not Available"
-                  : targetCountry.capital
-              }</span></h3>
-            </div>
-            <div class="profile2">
-              <h3>Top Level Domain: <span class="info">${
-                targetCountry.topLevelDomain
-              }</span></h3>
-              <h3>Currencies: <span class="info">${
-                targetCountry.currency === undefined
-                  ? "Not Available"
-                  : targetCountry.currency[0].name
-              }</span></h3>
-              <h3>
-                Languages: <span class="info">${languages.join(", ")}</span>
-              </h3>
-            </div>
-          </div>
-          <div class="borders">
-            <h3>Border Countries:</h3>
-            <div class="borders-country">
-              ${borderCountries()}
-            </div>
-          </div>
-        </div>
-        `;
+        detailsPageContent.innerHTML = this.articlePageContent(
+          targetCountry,
+          borderCountries,
+          languages
+        );
 
-        // localStorage.setItem("main-page-scroll", countriesDOM.scrollWidth);
         mainPage.classList.toggle("close");
         detailsPage.classList.toggle("close");
+
+        detailsPage.addEventListener("click", Event => {
+          if (Event.target.classList.contains("border-country-btn")) {
+            let newTargetCountry = countries.find(
+              country => country.alpha3Code === Event.target.textContent
+            );
+
+            const newBorderCountries = () => {
+              let result = ``;
+              if (newTargetCountry.borderCountries === undefined) {
+                return "Not Available";
+              } else {
+                for (const border of newTargetCountry.borderCountries) {
+                  if (
+                    country.previousElementSibling.classList.contains(
+                      "dark-mode-element"
+                    )
+                  ) {
+                    result += `
+                  <button class="border-country-btn dark-mode-element">${border}</button>
+                  `;
+                  } else {
+                    result += `
+                    <button class="border-country-btn">${border}</button>
+                    `;
+                  }
+                }
+                return result;
+              }
+            };
+
+            const newLanguages = newTargetCountry.languages.map(
+              eachLang => eachLang.name
+            );
+
+            detailsPageContent.innerHTML = this.articlePageContent(
+              newTargetCountry,
+              newBorderCountries,
+              newLanguages
+            );
+          }
+        });
       }
     });
+  }
+
+  articlePageContent(item, brdrCountries, langs) {
+    return `
+    <div class="image-container">
+    <img src=${item.flag} alt="" class="country-flag" />
+    </div>
+    <div class="country-details">
+      <h2>${item.name}</h2>
+      <div class="country-profile">
+        <div class="profile1">
+          <h3>Native Name: <span class="info">${item.nativeName}</span></h3>
+          <h3>Population: <span class="info">${
+            item.population === 0
+              ? "Uninhabited"
+              : item.population.toLocaleString()
+          }</span></h3>
+          <h3>Region: <span class="info">${item.region}</span></h3>
+          <h3>Sub Region: <span class="info">${item.subregion}</span></h3>
+          <h3>Capital: <span class="info">${
+            item.capital === undefined ? "Not Available" : item.capital
+          }</span></h3>
+        </div>
+        <div class="profile2">
+          <h3>Top Level Domain: <span class="info">${
+            item.topLevelDomain
+          }</span></h3>
+          <h3>Currencies: <span class="info">${
+            item.currency === undefined
+              ? "Not Available"
+              : item.currency[0].name
+          }</span></h3>
+          <h3>
+            Languages: <span class="info">${langs.join(", ")}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="borders">
+        <h3>Border Countries:</h3>
+        <div class="borders-country">
+          ${brdrCountries()}
+        </div>
+      </div>
+    </div>
+    `;
   }
 }
 
