@@ -379,10 +379,74 @@ article {
 }
 /* end of dark mode styles */
 
-/* transform properties for content and details page */
-/* .translate-right {
-  transform: translateX(107%);
+/* media queries */
+@media (max-width: 737px) {
+  main .controls {
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
-.translate-left {
-  transform: translateX(-107%);
-} */
+
+@media (max-width: 649px) {
+  .input-text {
+    width: 100%;
+  }
+  .countries {
+    justify-items: center;
+  }
+  .country {
+    min-width: 340px;
+  }
+}
+
+@media (max-width: 535px) {
+  article.details-page {
+    width: 80%;
+  }
+  .country-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .country-details .country-profile {
+    margin: 1rem 0;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .country-details .borders {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .country-details .borders-country {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 459px) {
+  .head h1 {
+    font-size: 1rem;
+  }
+  .nav-icon {
+    vertical-align: middle;
+  }
+  .dark-mode {
+    font-size: 0.8rem;
+  }
+  .dark-mode p {
+    margin-left: 0rem;
+  }
+  .fa-moon {
+    font-size: 1rem;
+  }
+  .countries {
+    padding: 0 1rem;
+  }
+  .country {
+    min-width: auto;
+  }
+  .devlink {
+    width: 80%;
+    margin: 2rem auto 0;
+  }
+}

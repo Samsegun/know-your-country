@@ -103,17 +103,21 @@ class UI {
             return "Not Available";
           } else {
             for (const border of targetCountry.borderCountries) {
+              let countryName = countries.find(
+                country => country.alpha3Code === border
+              );
+
               if (
                 country.previousElementSibling.classList.contains(
                   "dark-mode-element"
                 )
               ) {
                 result += `
-              <button class="border-country-btn dark-mode-element">${border}</button>
+              <button class="border-country-btn dark-mode-element">${countryName.name}</button>
               `;
               } else {
                 result += `
-                <button class="border-country-btn">${border}</button>
+                <button class="border-country-btn">${countryName.name}</button>
                 `;
               }
             }
@@ -133,7 +137,7 @@ class UI {
         detailsPage.addEventListener("click", Event => {
           if (Event.target.classList.contains("border-country-btn")) {
             let newTargetCountry = countries.find(
-              country => country.alpha3Code === Event.target.textContent
+              country => country.name === Event.target.textContent
             );
 
             const newBorderCountries = () => {
@@ -142,17 +146,20 @@ class UI {
                 return "Not Available";
               } else {
                 for (const border of newTargetCountry.borderCountries) {
+                  let countryName = countries.find(
+                    country => country.alpha3Code === border
+                  );
                   if (
                     country.previousElementSibling.classList.contains(
                       "dark-mode-element"
                     )
                   ) {
                     result += `
-                  <button class="border-country-btn dark-mode-element">${border}</button>
+                  <button class="border-country-btn dark-mode-element">${countryName.name}</button>
                   `;
                   } else {
                     result += `
-                    <button class="border-country-btn">${border}</button>
+                    <button class="border-country-btn">${countryName.name}</button>
                     `;
                   }
                 }
