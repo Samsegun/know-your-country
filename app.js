@@ -284,7 +284,6 @@ form.addEventListener("submit", Event => {
   Event.preventDefault();
 });
 
-// weird scroll-height behaviour
 input.addEventListener("keyup", Event => {
   Event.preventDefault();
 
