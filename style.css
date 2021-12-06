@@ -58,6 +58,10 @@ header {
   font-size: 1.3rem;
 }
 
+.nav-icon {
+  vertical-align: middle;
+}
+
 .dark-mode {
   display: flex;
   align-items: center;
@@ -199,6 +203,12 @@ main .controls {
   font-weight: 800;
   background: rgba(224, 219, 219, 0.39);
   cursor: pointer;
+}
+
+.loading-message {
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-align: center;
 }
 
 .countries {

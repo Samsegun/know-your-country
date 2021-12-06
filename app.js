@@ -1,56 +1,33 @@
 // datas of country
 let countryData;
 
-// getting the countries
-class Countries {
-  async getCountries(mode) {
-    try {
-      let result = await fetch(`https://restcountries.com/v2/${mode}`);
-      let data = await result.json();
-      let id = 0;
-
-      let countries = data.map(country => {
-        const {
-          name,
-          nativeName,
-          flag,
-          population,
-          capital,
-          region,
-          subregion,
-          alpha3Code,
-        } = country;
-        const topLevelDomain = country.topLevelDomain;
-        const currency = country.currencies;
-        const languages = country.languages;
-        const borderCountries = country.borders;
-        id++;
-
-        return {
-          name,
-          nativeName,
-          flag,
-          population,
-          capital,
-          region,
-          subregion,
-          alpha3Code,
-          topLevelDomain,
-          currency,
-          languages,
-          borderCountries,
-          id,
-        };
-      });
-      return countries;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-}
-
 // client-height
 let clientHeight;
+
+// getting the countries
+// class Countries {
+function getCountries(mode) {
+  let errorType;
+
+  return fetch(`https://restcountries.com/v2/${mode}`)
+    .then(response => {
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
+      } else {
+        return response.json().then(errData => {
+          errData = "Server-side Error";
+          // errorType = "server-side error";
+          throw new Error(errData);
+        });
+      }
+    })
+    .catch(error => {
+      error =
+        error.message === "Server-side Error" ? error.message : "Network error";
+      // console.log(error);
+      throw new Error(error);
+    });
+}
 
 class UI {
   createCountry(country) {
@@ -228,23 +205,61 @@ class UI {
   }
 }
 
-const domHandler = mode => {
-  const countries = new Countries();
-  const ui = new UI();
-  darkMode.style.display = "none";
+async function domHandler(mode) {
+  try {
+    darkMode.style.display = "none";
 
-  // display countries
-  countries
-    .getCountries(mode)
-    .then(countries => {
-      ui.displayCountries(countries);
-      countryData = [...countries];
-    })
-    .then(() => {
-      darkMode.style.display = "block";
-      ui.onCountries(countryData);
+    const responseData = await getCountries(mode);
+    const ui = new UI();
+
+    let id = 0;
+
+    let countries = responseData.map(country => {
+      const {
+        name,
+        nativeName,
+        flag,
+        population,
+        capital,
+        region,
+        subregion,
+        alpha3Code,
+      } = country;
+      const topLevelDomain = country.topLevelDomain;
+      const currency = country.currencies;
+      const languages = country.languages;
+      const borderCountries = country.borders;
+      id++;
+
+      return {
+        name,
+        nativeName,
+        flag,
+        population,
+        capital,
+        region,
+        subregion,
+        alpha3Code,
+        topLevelDomain,
+        currency,
+        languages,
+        borderCountries,
+        id,
+      };
     });
-};
+
+    // display countries
+    ui.displayCountries(countries);
+    countryData = [...countries];
+    darkMode.style.display = "block";
+    loadingText.classList.toggle("close");
+
+    ui.onCountries(countryData);
+  } catch (error) {
+    console.log(error);
+    loadingText.textContent = `Failed to load countries (${error.message})`;
+  }
+}
 
 document.addEventListener("DOMContentLoaded", domHandler.bind(this, "all"));
 

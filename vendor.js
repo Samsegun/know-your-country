@@ -9,6 +9,7 @@ const filterControl = document.querySelector(".filter-control");
 const filterControlBtn = document.querySelector(".filter-control .filter-btn");
 const filterDropDown = document.querySelector(".filter-dropdown");
 const continents = document.querySelector(".filter-dropdown .continents");
+const loadingText = document.querySelector(".loading-message");
 const countriesDOM = document.querySelector(".countries");
 const detailsPage = container.querySelector("article");
 const returnBtn = container.querySelector(".return-btn");
