@@ -13,7 +13,6 @@ const loadingText = document.querySelector(".loading-message");
 const countriesDOM = document.querySelector(".countries");
 const detailsPage = container.querySelector("article");
 const returnBtn = container.querySelector(".return-btn");
-// const detailsPageWrapper = container.querySelector("article .country-wrapper");
 const detailsPageContent = container.querySelector("article .country-content");
 const detailsPageCountryProfile = container.querySelector(
   "article .country-details"

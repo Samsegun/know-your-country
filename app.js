@@ -5,9 +5,9 @@ let countryData;
 let clientHeight;
 
 // getting the countries
-// class Countries {
 function getCountries(mode) {
-  let errorType;
+  // server status
+  let serverStatus;
 
   return fetch(`https://restcountries.com/v2/${mode}`)
     .then(response => {
@@ -15,16 +15,17 @@ function getCountries(mode) {
         return response.json();
       } else {
         return response.json().then(errData => {
-          errData = "Server-side Error";
-          // errorType = "server-side error";
+          serverStatus = response.status;
+          errData = "Server-side Error: ";
           throw new Error(errData);
         });
       }
     })
     .catch(error => {
       error =
-        error.message === "Server-side Error" ? error.message : "Network error";
-      // console.log(error);
+        error.message === "Server-side Error: "
+          ? error.message + serverStatus
+          : "Network error";
       throw new Error(error);
     });
 }
