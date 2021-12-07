@@ -242,7 +242,9 @@ main .controls {
   background: var(--white);
   height: 50%;
   padding: 1rem;
-  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+  /* box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput); */
+  box-shadow: 5px 2px 5px 0 rgb(0 0 0 / 20%) inset,
+    -3px -3px 5px 0 rgb(0 0 0 / 20%) inset;
   transition: all 0.3s;
 }
 
@@ -385,7 +387,9 @@ article {
   background: var(--dark-blue);
   color: var(--white);
   border: none;
-  box-shadow: 0 5px 4px var(--darkmode-boxshadow);
+  box-shadow: 0 5px 4px var(--darkmode-boxshadow),
+    5px 2px 5px 0 var(--darkmode-boxshadow) inset,
+    -3px -3px 5px 0 var(--darkmode-boxshadow) inset;
 }
 /* end of dark mode styles */
 
