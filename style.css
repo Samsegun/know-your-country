@@ -62,6 +62,10 @@ header {
   vertical-align: middle;
 }
 
+.dummy {
+  display: none;
+}
+
 .dark-mode {
   display: flex;
   align-items: center;
