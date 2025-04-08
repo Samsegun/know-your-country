@@ -5,163 +5,188 @@ let countryData;
 let clientHeight;
 
 // getting the countries
-function getCountries(mode) {
-  // server status
-  let serverStatus;
+// function getCountries(mode) {
+//   // server status
+//   let serverStatus;
 
-  return fetch(`https://restcountries.com/v2/${mode}`)
-    .then(response => {
-      if (response.status >= 200 && response.status < 300) {
-        return response.json();
-      } else {
-        return response.json().then(errData => {
-          serverStatus = response.status;
-          errData = "Server-side Error: ";
-          throw new Error(errData);
-        });
-      }
-    })
-    .catch(error => {
-      error =
-        error.message === "Server-side Error: "
-          ? error.message + serverStatus
-          : "Network error";
-      throw new Error(error);
-    });
+//   return fetch(`https://restcountries.com/v2/${mode}`)
+//     .then(response => {
+//       if (response.status >= 200 && response.status < 300) {
+//         return response.json();
+//       } else {
+//         return response.json().then(errData => {
+//           serverStatus = response.status;
+//           errData = "Server-side Error: ";
+//           throw new Error(errData);
+//         });
+//       }
+//     })
+//     .catch(error => {
+//       error =
+//         error.message === "Server-side Error: "
+//           ? error.message + serverStatus
+//           : "Network error";
+//       throw new Error(error);
+//     });
+// }
+async function getCountries(mode) {
+    // server status
+    let serverStatus;
+
+    try {
+        const response = await fetch(`https://restcountries.com/v2/${mode}`);
+        if (response.ok) {
+            return response.json();
+        } else {
+            serverStatus = response.status;
+            errData = "Server-side Error: ";
+            throw new Error(errData);
+        }
+    } catch (error) {
+        error =
+            error.message === "Server-side Error: "
+                ? error.message + serverStatus
+                : "Network error";
+        throw new Error(error);
+    }
 }
 
 class UI {
-  createCountry(country) {
-    const div = document.createElement("div");
-    div.className = "country";
-    div.innerHTML = `
+    createCountry(country) {
+        const div = document.createElement("div");
+        div.className = "country";
+        div.innerHTML = `
       <img src=${country.flag} alt="country"/>
       <div class="country-info">
         <h2 class="country-name">${country.name}</h2>
         <h3>Population: <span class="info">${
-          country.population === 0
-            ? "Uninhabited"
-            : country.population.toLocaleString()
+            country.population === 0
+                ? "Uninhabited"
+                : country.population.toLocaleString()
         }</span></h3>
         <h3 class="region">Region: <span class="info">${
-          country.region
+            country.region
         }</span></h3>
         <h3>Capital: <span class="info">${
-          country.capital === undefined ? "Not Available" : country.capital
+            country.capital === undefined ? "Not Available" : country.capital
         }</span></h3>
       </div>
       <div class = "details" id = ${country.id}></div>
       `;
-    countriesDOM.append(div);
-  }
+        countriesDOM.append(div);
+    }
 
-  displayCountries(countries) {
-    countries.forEach(country => this.createCountry(country));
-  }
+    displayCountries(countries) {
+        countries.forEach(country => this.createCountry(country));
+    }
 
-  onCountries(countries) {
-    countriesDOM.addEventListener("click", Event => {
-      if (Event.target.classList.contains("details")) {
-        let country = Event.target;
-        let id = parseInt(country.id);
+    onCountries(countries) {
+        countriesDOM.addEventListener("click", Event => {
+            if (Event.target.classList.contains("details")) {
+                let country = Event.target;
+                let id = parseInt(country.id);
 
-        // for window scrolling
-        clientHeight = country.parentElement.offsetTop;
+                // for window scrolling
+                clientHeight = country.parentElement.offsetTop;
 
-        let targetCountry = countries.find(country => country.id === id);
+                let targetCountry = countries.find(
+                    country => country.id === id
+                );
 
-        // for inconsistencies in languages & borderCountries data structure
-        const languages = targetCountry.languages.map(
-          eachLang => eachLang.name
-        );
+                // for inconsistencies in languages & borderCountries data structure
+                const languages = targetCountry.languages.map(
+                    eachLang => eachLang.name
+                );
 
-        const borderCountries = () => {
-          let result = ``;
-          if (targetCountry.borderCountries === undefined) {
-            return "Not Available";
-          } else {
-            for (const border of targetCountry.borderCountries) {
-              let countryName = countries.find(
-                country => country.alpha3Code === border
-              );
+                const borderCountries = () => {
+                    let result = ``;
+                    if (targetCountry.borderCountries === undefined) {
+                        return "Not Available";
+                    } else {
+                        for (const border of targetCountry.borderCountries) {
+                            let countryName = countries.find(
+                                country => country.alpha3Code === border
+                            );
 
-              if (
-                country.previousElementSibling.classList.contains(
-                  "dark-mode-element"
-                )
-              ) {
-                result += `
+                            if (
+                                country.previousElementSibling.classList.contains(
+                                    "dark-mode-element"
+                                )
+                            ) {
+                                result += `
               <button class="border-country-btn dark-mode-element">${countryName.name}</button>
               `;
-              } else {
-                result += `
+                            } else {
+                                result += `
                 <button class="border-country-btn">${countryName.name}</button>
                 `;
-              }
-            }
-            return result;
-          }
-        };
+                            }
+                        }
+                        return result;
+                    }
+                };
 
-        detailsPageContent.innerHTML = this.articlePageContent(
-          targetCountry,
-          borderCountries,
-          languages
-        );
+                detailsPageContent.innerHTML = this.articlePageContent(
+                    targetCountry,
+                    borderCountries,
+                    languages
+                );
 
-        mainPage.classList.toggle("close");
-        detailsPage.classList.toggle("close");
+                mainPage.classList.toggle("close");
+                detailsPage.classList.toggle("close");
 
-        detailsPage.addEventListener("click", Event => {
-          if (Event.target.classList.contains("border-country-btn")) {
-            let newTargetCountry = countries.find(
-              country => country.name === Event.target.textContent
-            );
+                detailsPage.addEventListener("click", Event => {
+                    if (Event.target.classList.contains("border-country-btn")) {
+                        let newTargetCountry = countries.find(
+                            country => country.name === Event.target.textContent
+                        );
 
-            const newBorderCountries = () => {
-              let result = ``;
-              if (newTargetCountry.borderCountries === undefined) {
-                return "Not Available";
-              } else {
-                for (const border of newTargetCountry.borderCountries) {
-                  let countryName = countries.find(
-                    country => country.alpha3Code === border
-                  );
-                  if (
-                    country.previousElementSibling.classList.contains(
-                      "dark-mode-element"
-                    )
-                  ) {
-                    result += `
+                        const newBorderCountries = () => {
+                            let result = ``;
+                            if (
+                                newTargetCountry.borderCountries === undefined
+                            ) {
+                                return "Not Available";
+                            } else {
+                                for (const border of newTargetCountry.borderCountries) {
+                                    let countryName = countries.find(
+                                        country => country.alpha3Code === border
+                                    );
+                                    if (
+                                        country.previousElementSibling.classList.contains(
+                                            "dark-mode-element"
+                                        )
+                                    ) {
+                                        result += `
                   <button class="border-country-btn dark-mode-element">${countryName.name}</button>
                   `;
-                  } else {
-                    result += `
+                                    } else {
+                                        result += `
                     <button class="border-country-btn">${countryName.name}</button>
                     `;
-                  }
-                }
-                return result;
-              }
-            };
+                                    }
+                                }
+                                return result;
+                            }
+                        };
 
-            const newLanguages = newTargetCountry.languages.map(
-              eachLang => eachLang.name
-            );
+                        const newLanguages = newTargetCountry.languages.map(
+                            eachLang => eachLang.name
+                        );
 
-            detailsPageContent.innerHTML = this.articlePageContent(
-              newTargetCountry,
-              newBorderCountries,
-              newLanguages
-            );
-          }
+                        detailsPageContent.innerHTML = this.articlePageContent(
+                            newTargetCountry,
+                            newBorderCountries,
+                            newLanguages
+                        );
+                    }
+                });
+            }
         });
-      }
-    });
-  }
+    }
 
-  articlePageContent(item, brdrCountries, langs) {
-    return `
+    articlePageContent(item, brdrCountries, langs) {
+        return `
     <div class="image-container">
     <img src=${item.flag} alt="" class="country-flag" />
     </div>
@@ -171,24 +196,24 @@ class UI {
         <div class="profile1">
           <h3>Native Name: <span class="info">${item.nativeName}</span></h3>
           <h3>Population: <span class="info">${
-            item.population === 0
-              ? "Uninhabited"
-              : item.population.toLocaleString()
+              item.population === 0
+                  ? "Uninhabited"
+                  : item.population.toLocaleString()
           }</span></h3>
           <h3>Region: <span class="info">${item.region}</span></h3>
           <h3>Sub Region: <span class="info">${item.subregion}</span></h3>
           <h3>Capital: <span class="info">${
-            item.capital === undefined ? "Not Available" : item.capital
+              item.capital === undefined ? "Not Available" : item.capital
           }</span></h3>
         </div>
         <div class="profile2">
           <h3>Top Level Domain: <span class="info">${
-            item.topLevelDomain
+              item.topLevelDomain
           }</span></h3>
           <h3>Currencies: <span class="info">${
-            item.currency === undefined
-              ? "Not Available"
-              : item.currency[0].name
+              item.currency === undefined
+                  ? "Not Available"
+                  : item.currency[0].name
           }</span></h3>
           <h3>
             Languages: <span class="info">${langs.join(", ")}</span>
@@ -203,137 +228,137 @@ class UI {
       </div>
     </div>
     `;
-  }
+    }
 }
 
 async function domHandler(mode) {
-  try {
-    darkMode.style.display = "none";
+    try {
+        darkMode.style.display = "none";
 
-    const responseData = await getCountries(mode);
-    const ui = new UI();
+        const responseData = await getCountries(mode);
+        const ui = new UI();
 
-    let id = 0;
+        let id = 0;
 
-    let countries = responseData.map(country => {
-      const {
-        name,
-        nativeName,
-        flag,
-        population,
-        capital,
-        region,
-        subregion,
-        alpha3Code,
-      } = country;
-      const topLevelDomain = country.topLevelDomain;
-      const currency = country.currencies;
-      const languages = country.languages;
-      const borderCountries = country.borders;
-      id++;
+        let countries = responseData.map(country => {
+            const {
+                name,
+                nativeName,
+                flag,
+                population,
+                capital,
+                region,
+                subregion,
+                alpha3Code,
+            } = country;
+            const topLevelDomain = country.topLevelDomain;
+            const currency = country.currencies;
+            const languages = country.languages;
+            const borderCountries = country.borders;
+            id++;
 
-      return {
-        name,
-        nativeName,
-        flag,
-        population,
-        capital,
-        region,
-        subregion,
-        alpha3Code,
-        topLevelDomain,
-        currency,
-        languages,
-        borderCountries,
-        id,
-      };
-    });
+            return {
+                name,
+                nativeName,
+                flag,
+                population,
+                capital,
+                region,
+                subregion,
+                alpha3Code,
+                topLevelDomain,
+                currency,
+                languages,
+                borderCountries,
+                id,
+            };
+        });
 
-    // display countries
-    ui.displayCountries(countries);
-    countryData = [...countries];
-    darkMode.style.display = "block";
-    loadingText.classList.toggle("close");
+        // display countries
+        ui.displayCountries(countries);
+        countryData = [...countries];
+        darkMode.style.display = "block";
+        loadingText.classList.toggle("close");
 
-    ui.onCountries(countryData);
-  } catch (error) {
-    console.log(error);
-    loadingText.textContent = `Failed to load countries (${error.message})`;
-  }
+        ui.onCountries(countryData);
+    } catch (error) {
+        console.log(error);
+        loadingText.textContent = `Failed to load countries (${error.message})`;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", domHandler.bind(this, "all"));
 
 filterControlBtn.addEventListener("click", () => {
-  filterDropDown.classList.toggle("slide-down");
-  filterControlBtn.classList.toggle("rotate");
+    filterDropDown.classList.toggle("slide-down");
+    filterControlBtn.classList.toggle("rotate");
 });
 
 darkMode.addEventListener("click", () => {
-  container.classList.toggle("dark-mode-bg");
-  header.classList.toggle("dark-mode-element");
-  input.classList.toggle("dark-mode-element");
-  filterControl.classList.toggle("dark-mode-element");
-  filterDropDown.classList.toggle("dark-mode-element");
-  const countryInfos = document.querySelectorAll(".country-info");
-  countryInfos.forEach(country =>
-    country.classList.toggle("dark-mode-element")
-  );
-  returnBtn.classList.toggle("dark-mode-element");
-  const borderCountries = document.querySelectorAll(".border-country-btn");
-  borderCountries.forEach(border =>
-    border.classList.toggle("dark-mode-element")
-  );
+    container.classList.toggle("dark-mode-bg");
+    header.classList.toggle("dark-mode-element");
+    input.classList.toggle("dark-mode-element");
+    filterControl.classList.toggle("dark-mode-element");
+    filterDropDown.classList.toggle("dark-mode-element");
+    const countryInfos = document.querySelectorAll(".country-info");
+    countryInfos.forEach(country =>
+        country.classList.toggle("dark-mode-element")
+    );
+    returnBtn.classList.toggle("dark-mode-element");
+    const borderCountries = document.querySelectorAll(".border-country-btn");
+    borderCountries.forEach(border =>
+        border.classList.toggle("dark-mode-element")
+    );
 });
 
 returnBtn.addEventListener("click", Event => {
-  detailsPage.classList.toggle("close");
-  mainPage.classList.toggle("close");
-  detailsPageContent.innerHTML = ``;
-  window.scrollTo({
-    top: clientHeight - 120,
-    behavior: "instant",
-  });
+    detailsPage.classList.toggle("close");
+    mainPage.classList.toggle("close");
+    detailsPageContent.innerHTML = ``;
+    window.scrollTo({
+        top: clientHeight - 120,
+        behavior: "instant",
+    });
 });
 
 form.addEventListener("submit", Event => {
-  Event.preventDefault();
+    Event.preventDefault();
 });
 
 input.addEventListener("keyup", Event => {
-  Event.preventDefault();
+    Event.preventDefault();
 
-  const text = input.value.toLowerCase();
+    const text = input.value.toLowerCase();
 
-  const countries = countriesDOM.querySelectorAll(".country-name");
+    const countries = countriesDOM.querySelectorAll(".country-name");
 
-  Array.from(countries).forEach(country => {
-    const countryName = country.textContent.toLowerCase();
+    Array.from(countries).forEach(country => {
+        const countryName = country.textContent.toLowerCase();
 
-    if (countryName.indexOf(text) != -1) {
-      country.parentElement.parentElement.style.display = "flex";
-    } else {
-      country.parentElement.parentElement.style.display = "none";
-    }
-  });
+        if (countryName.indexOf(text) != -1) {
+            country.parentElement.parentElement.style.display = "flex";
+        } else {
+            country.parentElement.parentElement.style.display = "none";
+        }
+    });
 });
 
 continents.addEventListener("click", Event => {
-  if (Event.target.classList.contains("continent")) {
-    const text = Event.target.textContent.toLowerCase();
+    if (Event.target.classList.contains("continent")) {
+        const text = Event.target.textContent.toLowerCase();
 
-    const countries = countriesDOM.querySelectorAll(".region .info");
+        const countries = countriesDOM.querySelectorAll(".region .info");
 
-    Array.from(countries).forEach(country => {
-      const countryName = country.textContent.toLowerCase();
+        Array.from(countries).forEach(country => {
+            const countryName = country.textContent.toLowerCase();
 
-      if (countryName === text) {
-        country.parentElement.parentElement.parentElement.style.display =
-          "flex";
-      } else {
-        country.parentElement.parentElement.parentElement.style.display =
-          "none";
-      }
-    });
-  }
+            if (countryName === text) {
+                country.parentElement.parentElement.parentElement.style.display =
+                    "flex";
+            } else {
+                country.parentElement.parentElement.parentElement.style.display =
+                    "none";
+            }
+        });
+    }
 });

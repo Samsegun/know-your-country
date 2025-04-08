@@ -1,469 +1,470 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
 
 :root {
-  --dark-blue: hsl(209, 23%, 22%);
-  --very-dark-blue-darkmode: hsl(207, 26%, 17%);
-  --very-dark-blue-lightmodetext: hsl(200, 15%, 8%);
-  --dark-gray-lightmodeinput: hsl(0, 0%, 52%);
-  --very-lightgray: hsl(0, 0%, 98%);
-  --darkmode-boxshadow: rgba(0, 0, 0, 0.15);
-  --white: white;
+    --dark-blue: hsl(209, 23%, 22%);
+    --very-dark-blue-darkmode: hsl(207, 26%, 17%);
+    --very-dark-blue-lightmodetext: hsl(200, 15%, 8%);
+    --dark-gray-lightmodeinput: hsl(0, 0%, 52%);
+    --very-lightgray: hsl(0, 0%, 98%);
+    --darkmode-boxshadow: rgba(0, 0, 0, 0.15);
+    --white: white;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: "Nunito Sans", Arial;
-  background: var(--very-lightgray);
-  overflow-x: hidden;
+    font-family: "Nunito Sans", Arial;
+    background: var(--very-lightgray);
+    overflow-x: hidden;
 }
 
 .container {
-  position: relative;
-  margin: 0 auto;
-  min-height: 100vh;
-  background: var(--very-lightgray);
-  transition: all 0.3s linear;
+    position: relative;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--very-lightgray);
+    transition: all 0.3s linear;
 }
 
 /* header */
 
 header {
-  box-shadow: 0 1px 4px rgba(104, 104, 104, 0.8);
-  background: var(--white);
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  transition: all 0.3s linear;
+    box-shadow: 0 1px 4px rgba(104, 104, 104, 0.8);
+    background: var(--white);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    transition: all 0.3s linear;
 }
 
 .margin-width-desktop {
-  width: 90%;
-  margin: 0 auto;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 62.5rem;
 }
 
 .head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
 }
 
 .head h1 {
-  font-size: 1.3rem;
+    font-size: 1.3rem;
 }
 
 .nav-icon {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 .dummy {
-  display: none;
+    display: none;
 }
 
 .dark-mode {
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
 }
 
 .dark-mode p {
-  display: inline-block;
-  margin-left: 0.5rem;
-  font-weight: 600;
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-weight: 600;
 }
 
 .dark-mode p,
 .far,
 .fas,
 button {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .fa-moon {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 /* end of header */
 
 /* main */
 .close {
-  display: none;
+    display: none;
 }
 
 .main {
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
 }
 
 main .controls {
-  margin: 3rem 0;
-  display: flex;
-  justify-content: space-between;
+    margin: 3rem 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .controls .search {
-  position: relative;
+    position: relative;
 }
 
 .controls .searchbtn {
-  border: none;
-  background: none;
-  padding: 1rem;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  color: inherit;
-  transition: color 0.3s;
+    border: none;
+    background: none;
+    padding: 1rem;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: inherit;
+    transition: color 0.3s;
 }
 
 .input-text {
-  padding: 1rem 3rem;
-  width: 25rem;
-  font-size: 0.9rem;
-  outline: none;
-  border: none;
-  color: inherit;
-  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
-  border-radius: 4px;
-  transition: all 0.3s;
+    padding: 1rem 3rem;
+    width: 25rem;
+    font-size: 0.9rem;
+    outline: none;
+    border: none;
+    color: inherit;
+    box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+    border-radius: 4px;
+    transition: all 0.3s;
 }
 
 .controls .input-text::placeholder {
-  color: inherit;
+    color: inherit;
 }
 
 .filter {
-  width: 12.5rem;
-  position: relative;
+    width: 12.5rem;
+    position: relative;
 }
 
 .filter-control {
-  display: flex;
-  justify-content: space-between;
-  background: var(--white);
-  padding: 1rem;
-  box-shadow: 1px 1px 2px var(--dark-gray-lightmodeinput);
-  border-radius: 4px;
-  transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    background: var(--white);
+    padding: 1rem;
+    box-shadow: 1px 1px 2px var(--dark-gray-lightmodeinput);
+    border-radius: 4px;
+    transition: all 0.3s;
 }
 
 .filter-control small {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .filter-control .filter-btn {
-  background: none;
-  outline: none;
-  border: none;
-  color: inherit;
-  font-size: 1rem;
-  transform: rotate(0);
-  transition: transform 0.3s;
+    background: none;
+    outline: none;
+    border: none;
+    color: inherit;
+    font-size: 1rem;
+    transform: rotate(0);
+    transition: transform 0.3s;
 }
 
 .filter-control .filter-btn:hover {
-  background: rgba(211, 209, 209, 0.35);
+    background: rgba(211, 209, 209, 0.35);
 }
 
 .filter-btn.rotate {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .filter-dropdown {
-  position: absolute;
-  left: 0;
-  top: 3.3rem;
-  width: 100%;
-  height: 0;
-  overflow: hidden;
-  background: var(--white);
-  margin-top: 0.3rem;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
-  z-index: 1;
-  transition: all 0.3s;
+    position: absolute;
+    left: 0;
+    top: 3.3rem;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    background: var(--white);
+    margin-top: 0.3rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+    z-index: 1;
+    transition: all 0.3s;
 }
 
 .filter-dropdown.slide-down {
-  height: 14.4rem;
+    height: 14.4rem;
 }
 
 .filter-dropdown ul {
-  list-style: none;
-  padding: 1rem;
+    list-style: none;
+    padding: 1rem;
 }
 
 .filter-dropdown li {
-  margin: 1rem 0;
-  color: inherit;
-  font-weight: 600;
+    margin: 1rem 0;
+    color: inherit;
+    font-weight: 600;
 }
 
 .filter-dropdown li:hover {
-  font-weight: 800;
-  background: rgba(224, 219, 219, 0.39);
-  cursor: pointer;
+    font-weight: 800;
+    background: rgba(224, 219, 219, 0.39);
+    cursor: pointer;
 }
 
 .loading-message {
-  font-size: 1.3rem;
-  font-weight: 900;
-  text-align: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-align: center;
 }
 
 .countries {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16.3rem, 1fr));
-  gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16.3rem, 1fr));
+    gap: 3rem;
 }
 
 .countries .country {
-  position: relative;
-  max-width: 350px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s linear;
+    position: relative;
+    max-width: 350px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s linear;
 }
 
 .countries .country:hover {
-  cursor: pointer;
-  transform: scale(1.05);
+    cursor: pointer;
+    transform: scale(1.05);
 }
 
 .countries img {
-  width: 100%;
-  height: 50%;
-  object-fit: cover;
-  border-radius: 6px 6px 0 0;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
 }
 
 .country-info {
-  background: var(--white);
-  height: 50%;
-  padding: 1rem;
-  box-shadow: 2px 2px 5px 0 rgb(0 0 0 / 20%) inset,
-    -2px -2px 5px 0 rgb(0 0 0 / 20%) inset;
-  transition: all 0.3s;
+    background: var(--white);
+    height: 50%;
+    padding: 1rem;
+    box-shadow: 2px 2px 5px 0 rgb(0 0 0 / 20%) inset,
+        -2px -2px 5px 0 rgb(0 0 0 / 20%) inset;
+    transition: all 0.3s;
 }
 
 .countries .country-info h2 {
-  margin: 1rem 0;
-  font-size: 1rem;
+    margin: 1rem 0;
+    font-size: 1rem;
 }
 
 .countries .country-info h3 {
-  font-size: 0.8rem;
-  margin: 0.5rem 0;
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
 }
 
 .countries .country-info span {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .countries .details {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 /* end of main */
 
 /* details-page(article) */
 article {
-  min-height: calc(100vh - 76px - 38px - 18.5px);
-  max-width: 1440px;
+    min-height: calc(100vh - 76px - 38px - 18.5px);
+    max-width: 1440px;
 }
 
 .return-btn {
-  display: inline-block;
-  margin: 3rem 0;
-  border: none;
-  padding: 0.5rem 1rem;
-  background: none;
-  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
-  transition: transform 0.3s linear;
-  border-radius: 5px;
+    display: inline-block;
+    margin: 3rem 0;
+    border: none;
+    padding: 0.5rem 1rem;
+    background: none;
+    box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+    transition: transform 0.3s linear;
+    border-radius: 5px;
 }
 
 .return-btn:hover {
-  transform: scale(1.15);
+    transform: scale(1.15);
 }
 
 .country-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-  gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 3rem;
 }
 
 .country-flag {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 7px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 7px;
 }
 
 .country-details {
-  flex-basis: 100%;
-  margin: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+    flex-basis: 100%;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .country-details h2 {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .country-details h3 {
-  font-size: 0.87rem;
-  font-weight: 600;
+    font-size: 0.87rem;
+    font-weight: 600;
 }
 
 .country-details .country-profile {
-  display: flex;
-  justify-content: space-between;
-  line-height: 2.2;
-  margin-right: 2rem;
+    display: flex;
+    justify-content: space-between;
+    line-height: 2.2;
+    margin-right: 2rem;
 }
 
 .country-details .info {
-  font-weight: 300;
+    font-weight: 300;
 }
 
 .country-details .borders {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .country-details .borders-country {
-  margin-left: 1rem;
-  line-height: 2.2;
+    margin-left: 1rem;
+    line-height: 2.2;
 }
 
 .border-country-btn {
-  border: none;
-  font-size: 0.7rem;
-  margin: 0 0.2rem;
-  padding: 0.5rem 1rem;
-  background: none;
-  box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
-  border-radius: 4px;
-  transition: all 0.3s linear;
+    border: none;
+    font-size: 0.7rem;
+    margin: 0 0.2rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    box-shadow: 0 1px 4px var(--dark-gray-lightmodeinput);
+    border-radius: 4px;
+    transition: all 0.3s linear;
 }
 
 .country-details .borders-country button:hover {
-  transform: scale(1.15);
+    transform: scale(1.15);
 }
 /* end of details-page(article) */
 
 /* footer */
 
 .devlink {
-  padding: 0.5rem 0 1rem;
-  margin: 2rem 0 0;
-  text-align: center;
-  color: inherit;
-  font-weight: 600;
+    padding: 0.5rem 0 1rem;
+    margin: 2rem 0 0;
+    text-align: center;
+    color: inherit;
+    font-weight: 600;
 }
 
 .devlink a {
-  text-decoration: none;
-  color: rgb(196, 64, 64);
+    text-decoration: none;
+    color: rgb(196, 64, 64);
 }
 
 /* end of footer */
 
 /* dark mode styles */
 .dark-mode-bg {
-  background: var(--very-dark-blue-darkmode);
-  color: var(--white);
+    background: var(--very-dark-blue-darkmode);
+    color: var(--white);
 }
 
 .dark-mode-element {
-  background: var(--dark-blue);
-  color: var(--white);
-  border: none;
-  box-shadow: 0 5px 4px var(--darkmode-boxshadow),
-    5px 2px 5px 0 var(--darkmode-boxshadow) inset,
-    -3px -3px 5px 0 var(--darkmode-boxshadow) inset;
+    background: var(--dark-blue);
+    color: var(--white);
+    border: none;
+    box-shadow: 0 5px 4px var(--darkmode-boxshadow),
+        5px 2px 5px 0 var(--darkmode-boxshadow) inset,
+        -3px -3px 5px 0 var(--darkmode-boxshadow) inset;
 }
 /* end of dark mode styles */
 
 /* media queries */
 @media (max-width: 737px) {
-  main .controls {
-    flex-direction: column;
-    gap: 2rem;
-  }
+    main .controls {
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 649px) {
-  .input-text {
-    width: 100%;
-  }
-  .countries {
-    justify-items: center;
-  }
-  .country {
-    min-width: 340px;
-  }
+    .input-text {
+        width: 100%;
+    }
+    .countries {
+        justify-items: center;
+    }
+    .country {
+        min-width: 340px;
+    }
 }
 
 @media (max-width: 535px) {
-  article.details-page {
-    width: 80%;
-  }
-  .country-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .country-details .country-profile {
-    margin: 1rem 0;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .country-details .borders {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  .country-details .borders-country {
-    margin-left: 0;
-  }
+    article.details-page {
+        width: 80%;
+    }
+    .country-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .country-details .country-profile {
+        margin: 1rem 0;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .country-details .borders {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .country-details .borders-country {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 459px) {
-  .head h1 {
-    font-size: 1rem;
-  }
-  .nav-icon {
-    vertical-align: middle;
-  }
-  .dark-mode {
-    font-size: 0.8rem;
-  }
-  .dark-mode p {
-    margin-left: 0rem;
-  }
-  .fa-moon {
-    font-size: 1rem;
-  }
-  .countries {
-    padding: 0 1rem;
-  }
-  .country {
-    min-width: auto;
-  }
-  .devlink {
-    width: 80%;
-    margin: 2rem auto 0;
-  }
+    .head h1 {
+        font-size: 1rem;
+    }
+    .nav-icon {
+        vertical-align: middle;
+    }
+    .dark-mode {
+        font-size: 0.8rem;
+    }
+    .dark-mode p {
+        margin-left: 0rem;
+    }
+    .fa-moon {
+        font-size: 1rem;
+    }
+    .countries {
+        padding: 0 1rem;
+    }
+    .country {
+        min-width: auto;
+    }
+    .devlink {
+        width: 80%;
+        margin: 2rem auto 0;
+    }
 }
